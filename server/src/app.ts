@@ -16,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173', credentials: true })); // Allows your Vite frontend to talk to this backend with cookies
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true })); // Allows your Vite frontend to talk to this backend with cookies
 app.use(helmet({
   crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" }, // Allow Google Sign-In postMessage
   crossOriginEmbedderPolicy: false,
