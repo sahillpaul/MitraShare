@@ -34,7 +34,8 @@ export default function Login() {
         navigate('/home');
       }
     } catch (err: any) {
-      setError(err.response?.data?.error || "Authentication encountered an error.");
+      const apiErr = err.response?.data?.error;
+      setError(typeof apiErr === 'string' ? apiErr : "Authentication encountered an error.");
     } finally {
       setLoading(false);
     }
@@ -46,7 +47,8 @@ export default function Login() {
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/home');
     } catch (err: any) {
-      setError(err.response?.data?.error || "Google authentication failed.");
+      const apiErr = err.response?.data?.error;
+      setError(typeof apiErr === 'string' ? apiErr : "Google authentication failed.");
     }
   };
 
