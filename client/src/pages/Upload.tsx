@@ -66,6 +66,7 @@ export default function Upload() {
   };
 
   const executeUpload = async () => {
+    if (!file) return;
     setShowConfirm(false);
     setIsUploading(true);
     setStatusTone('');
