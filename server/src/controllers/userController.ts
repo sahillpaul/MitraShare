@@ -3,6 +3,8 @@ import type { AuthRequest } from '../middleware/authMiddleware.js';
 import { User } from '../models/user.js';
 import { File } from '../models/file.js';
 import { Types } from 'mongoose';
+import { redis } from '../config/redis.js';
+import { profileCacheKey, publicProfileCacheKey } from '../middleware/cacheMiddleware.js';
 
 // 1. The Profile Engine (Fetches user stats and their personal uploads)
 export const getMyProfile = async (req: AuthRequest, res: Response): Promise<any> => {
@@ -103,6 +105,10 @@ export const updateMyProfile = async (req: AuthRequest, res: Response): Promise<
     );
 
     if (!user) return res.status(404).json({ error: 'User not found.' });
+
+    // Invalidate cached profile data so the user sees fresh data immediately
+    await redis.del(profileCacheKey(userId));
+    await redis.del(publicProfileCacheKey(userId));
 
     return res.status(200).json({ message: 'Profile updated successfully', user });
   } catch (error) {

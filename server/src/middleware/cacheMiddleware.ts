@@ -1,11 +1,31 @@
 import type { Request, Response, NextFunction } from 'express';
 import { redis } from '../config/redis.js';
+import type { AuthRequest } from './authMiddleware.js';
 
-export const cacheRequest = (durationInSeconds: number) => {
+interface CacheOptions {
+  userAware?: boolean; // Append userId to cache key (for per-user responses like /me)
+}
+
+/**
+ * Build the cache key for a profile endpoint.
+ * Exported so controllers can call redis.del(profileCacheKey(userId)) for invalidation.
+ */
+export const profileCacheKey = (userId: string) => `cache:/api/users/me:${userId}`;
+export const publicProfileCacheKey = (userId: string) => `cache:/api/users/${userId}`;
+
+export const cacheRequest = (durationInSeconds: number, options?: CacheOptions) => {
     return async (req: Request, res: Response, next: NextFunction): Promise<any> => {
         // 1. Create a unique cache key based on the exact URL and query parameters
         // e.g., "cache:/api/files/library?semester=4&subject=DBMS"
-        const key = `cache:${req.originalUrl || req.url}`;
+        let key = `cache:${req.originalUrl || req.url}`;
+
+        // For user-aware routes (like /me), append the userId so each user gets their own cache
+        if (options?.userAware) {
+            const userId = (req as AuthRequest).user?.userId;
+            if (userId) {
+                key += `:${userId}`;
+            }
+        }
 
         try {
             // 2. Check if this exact request is already saved in Redis RAM (Cache Hit)

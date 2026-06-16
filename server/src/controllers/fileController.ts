@@ -5,6 +5,8 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from '../config/s3.js';
 import { File } from '../models/file.js';
 import type { AuthRequest } from '../middleware/authMiddleware.js';
+import { redis } from '../config/redis.js';
+import { profileCacheKey, publicProfileCacheKey } from '../middleware/cacheMiddleware.js';
 
 export const getUploadUrl = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -54,6 +56,14 @@ export const confirmUpload = async (req: Request, res: Response): Promise<any> =
   try {
     const { fileId } = req.body;
     const finalizedFile = await File.findByIdAndUpdate(fileId, { status: 'active' }, { returnDocument: 'after' });
+
+    // Invalidate the uploader's cached profile so their uploads list refreshes
+    if (finalizedFile?.uploaderId) {
+      const uploaderId = finalizedFile.uploaderId.toString();
+      await redis.del(profileCacheKey(uploaderId));
+      await redis.del(publicProfileCacheKey(uploaderId));
+    }
+
     return res.status(200).json({ message: "File active!", file: finalizedFile });
   } catch (error) {
     console.error("Failed to confirm upload:", error);
@@ -165,6 +175,10 @@ export const deleteFile = async (req: AuthRequest, res: Response): Promise<any> 
 
     // 4. Destroy the database record
     await file.deleteOne();
+
+    // 5. Invalidate the uploader's cached profile so their uploads list refreshes
+    await redis.del(profileCacheKey(userId!));
+    await redis.del(publicProfileCacheKey(userId!));
 
     return res.status(200).json({ message: "File permanently eradicated." });
   } catch (error) {
