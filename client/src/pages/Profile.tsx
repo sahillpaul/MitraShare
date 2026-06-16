@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
 import {
   GraduationCap, Home as HomeIcon, Search, UploadCloud, Settings,
   Trash2, Eye, ThumbsUp, MapPin, Edit3, X, Sun, Moon, Bell
@@ -12,8 +13,6 @@ const navItems = [
   { label: 'Home', to: '/home', icon: HomeIcon },
   { label: 'Browse', to: '/library', icon: Search },
   { label: 'Upload', to: '/upload', icon: UploadCloud },
-  { label: 'Settings', to: '#', icon: Settings },
-];
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -22,20 +21,12 @@ export default function Profile() {
   const [myUploads, setMyUploads] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem('mitrashare_theme') || 'dark');
+
 
   const currentUser = useUser() as any;
   const isOwnProfile = !id || (currentUser && id === currentUser._id);
 
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.body.classList.add('dark-theme', 'vault-dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme', 'vault-dark-theme');
-    }
-    localStorage.setItem('mitrashare_theme', theme);
-  }, [theme]);
+
 
   useEffect(() => {
     fetchProfileData();
@@ -107,38 +98,7 @@ export default function Profile() {
 
   return (
     <div className="vault-shell">
-      {/* ========================================= */}
-      {/* SETTINGS SIDEBAR                          */}
-      {/* ========================================= */}
-      <div className={`scholar-sidebar-overlay ${isSettingsOpen ? 'open' : ''}`} onClick={() => setIsSettingsOpen(false)} />
-      
-      <div className={`scholar-sidebar-panel ${isSettingsOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <h2>Settings</h2>
-          <button className="sidebar-close focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-md" onClick={() => setIsSettingsOpen(false)}>
-            <X size={24} strokeWidth={2} />
-          </button>
-        </div>
 
-        <div className="sidebar-content">
-          <button className="sidebar-item focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-md px-2" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
-            <div className="sidebar-item-left">
-              {theme === 'light' ? <Moon size={20} strokeWidth={2.2} /> : <Sun size={20} strokeWidth={2.2} />}
-              <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
-            </div>
-            <div className="sidebar-toggle-track">
-              <div className="sidebar-toggle-thumb"></div>
-            </div>
-          </button>
-
-          <button className="sidebar-item focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-md px-2">
-            <div className="sidebar-item-left">
-              <Bell size={20} strokeWidth={2.2} />
-              <span>Notifications</span>
-            </div>
-          </button>
-        </div>
-      </div>
 
       {/* --- DESKTOP NAV --- */}
       <nav className="scholar-topbar">
@@ -148,16 +108,13 @@ export default function Profile() {
         </NavLink>
         <div className="scholar-nav-list">
           {navItems.map(({ label, to, icon: Icon }) => (
-            label === 'Settings' ? (
-              <button key={label} onClick={(e) => { e.stopPropagation(); setIsSettingsOpen(!isSettingsOpen); }} className="scholar-nav-link">
-                <Icon size={18} strokeWidth={2.1} /><span>{label}</span>
-              </button>
-            ) : (
               <NavLink key={label} to={to} className="scholar-nav-link">
                 <Icon size={18} strokeWidth={2.1} /><span>{label}</span>
               </NavLink>
-            )
           ))}
+          <div className="scholar-nav-link" style={{ paddingLeft: '12px' }}>
+            <ThemeToggle />
+          </div>
         </div>
         <NavLink to="/profile" className="scholar-topbar-profile">
           <div className="scholar-avatar-initials">{getInitials(user?.name)}</div>
@@ -455,20 +412,16 @@ export default function Profile() {
       </div>
 
       {/* Mobile Nav */}
-      <nav className="scholar-mobile-nav sm:hidden" onClick={() => isSettingsOpen && setIsSettingsOpen(false)}>
+      <nav className="scholar-mobile-nav sm:hidden">
         {navItems.map(({ label, to, icon: Icon }) => (
-          label === 'Settings' ? (
-            <button key={label} onClick={(e) => { e.stopPropagation(); setIsSettingsOpen(!isSettingsOpen); }} className="scholar-mobile-link">
-              <Icon size={22} strokeWidth={2.5} />
-              {label}
-            </button>
-          ) : (
             <NavLink key={label} to={to} className={({isActive}) => isActive ? "scholar-mobile-link active" : "scholar-mobile-link"}>
               <Icon size={22} strokeWidth={2.5} />
               {label}
             </NavLink>
-          )
         ))}
+        <div className="scholar-mobile-link flex items-center justify-center pt-1">
+          <ThemeToggle />
+        </div>
       </nav>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
 import { calculateFileHash } from '../lib/hasher';
 import { subjectsMap } from '../lib/constants';
 import {
@@ -15,11 +16,9 @@ const navItems = [
   { label: 'Home', to: '/home', icon: HomeIcon },
   { label: 'Browse', to: '/library', icon: Search },
   { label: 'Upload', to: '/upload', icon: UploadCloud },
-  { label: 'Settings', to: '#', icon: Settings },
-];
 
 const categories = ['Notes', 'PYQ', 'Question Bank'];
-const getSavedTheme = () => localStorage.getItem('mitrashare_theme') || 'light';
+
 
 export default function Upload() {
   const user = useUser();
@@ -38,19 +37,9 @@ export default function Upload() {
   const [statusTone, setStatusTone] = useState<'success' | 'error' | ''>('');
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [theme, setTheme] = useState(getSavedTheme);
+
   const [showConfirm, setShowConfirm] = useState(false);
 
-  useEffect(() => {
-    // Apply or remove theme-related body classes and persist preference
-    if (theme === 'dark') {
-      document.body.classList.add('dark-theme', 'vault-dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme', 'vault-dark-theme');
-    }
-    localStorage.setItem('mitrashare_theme', theme);
-  }, [theme]);
 
   useEffect(() => {
     setTitle('');
@@ -239,32 +228,6 @@ export default function Upload() {
   return (
     <div className="scholar-shell upload-shell">
       {renderConfirmModal()}
-      <div className={`scholar-sidebar-overlay ${isSettingsOpen ? 'open' : ''}`} onClick={() => setIsSettingsOpen(false)} />
-      <div className={`scholar-sidebar-panel ${isSettingsOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <h2>Settings</h2>
-          <button className="sidebar-close" onClick={() => setIsSettingsOpen(false)}>
-            <X size={24} strokeWidth={2} />
-          </button>
-        </div>
-        <div className="sidebar-content">
-          <button className="sidebar-item" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
-            <div className="sidebar-item-left">
-              {theme === 'light' ? <Moon size={20} strokeWidth={2.2} /> : <Sun size={20} strokeWidth={2.2} />}
-              <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
-            </div>
-            <div className="sidebar-toggle-track">
-              <div className="sidebar-toggle-thumb"></div>
-            </div>
-          </button>
-          <button className="sidebar-item">
-            <div className="sidebar-item-left">
-              <Bell size={20} strokeWidth={2.2} />
-              <span>Notifications</span>
-            </div>
-          </button>
-        </div>
-      </div>
 
       {/* ========================================= */}
       {/* DESKTOP LAYOUT                            */}
@@ -277,16 +240,13 @@ export default function Upload() {
           </NavLink>
           <div className="scholar-nav-list">
             {navItems.map(({ label, to, icon: Icon }) => (
-              label === 'Settings' ? (
-                <button key={label} onClick={(e) => { e.stopPropagation(); setIsSettingsOpen(!isSettingsOpen); }} className="scholar-nav-link">
-                  <Icon size={18} strokeWidth={2.1} /><span>{label}</span>
-                </button>
-              ) : (
-                <NavLink key={label} to={to} className={`scholar-nav-link ${label === 'Upload' ? 'active' : ''}`}>
-                  <Icon size={18} strokeWidth={2.1} /><span>{label}</span>
-                </NavLink>
-              )
+              <NavLink key={label} to={to} className={`scholar-nav-link ${label === 'Upload' ? 'active' : ''}`}>
+                <Icon size={18} strokeWidth={2.1} /><span>{label}</span>
+              </NavLink>
             ))}
+            <div className="scholar-nav-link" style={{ paddingLeft: '12px' }}>
+              <ThemeToggle />
+            </div>
           </div>
           <NavLink to="/profile" className="scholar-topbar-profile">
             <div className="scholar-avatar-initials">{getInitials(user?.name)}</div>
@@ -489,18 +449,15 @@ export default function Upload() {
           </div>
         </main>
 
-        <nav className="scholar-mobile-nav" onClick={() => isSettingsOpen && setIsSettingsOpen(false)}>
+        <nav className="scholar-mobile-nav">
           {navItems.map(({ label, to, icon: Icon }) => (
-            label === 'Settings' ? (
-              <button key={label} onClick={(e) => { e.stopPropagation(); setIsSettingsOpen(!isSettingsOpen); }} className="scholar-mobile-link focus:outline-none">
-                <Icon size={21} strokeWidth={2.15} /><span>{label}</span>
-              </button>
-            ) : (
               <NavLink key={label} to={to} className={`scholar-mobile-link focus:outline-none ${label === 'Upload' ? 'active' : ''}`}>
                 <Icon size={21} strokeWidth={2.15} /><span>{label}</span>
               </NavLink>
-            )
           ))}
+          <div className="scholar-mobile-link flex items-center justify-center">
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
 
@@ -744,21 +701,19 @@ export default function Upload() {
         </div>
 
         {/* Mobile Nav Bottom Bar */}
-        <nav className="scholar-mobile-nav" onClick={() => isSettingsOpen && setIsSettingsOpen(false)}>
+        <nav className="scholar-mobile-nav">
           {navItems.map(({ label, to, icon: Icon }) => {
             const isActive = label === 'Upload';
-            return label === 'Settings' ? (
-              <button key={label} onClick={(e) => { e.stopPropagation(); setIsSettingsOpen(!isSettingsOpen); }} className={`scholar-mobile-link focus:outline-none ${isActive ? 'active' : ''}`}>
-                <Icon size={21} strokeWidth={2.15} />
-                <span>{label}</span>
-              </button>
-            ) : (
+            return (
               <NavLink key={label} to={to} className={`scholar-mobile-link focus:outline-none ${isActive ? 'active' : ''}`}>
                 <Icon size={21} strokeWidth={2.15} />
                 <span>{label}</span>
               </NavLink>
             )
           })}
+          <div className="scholar-mobile-link flex items-center justify-center pt-1">
+            <ThemeToggle />
+          </div>
         </nav>
       </div>
     </div>
