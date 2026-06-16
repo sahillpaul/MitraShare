@@ -366,7 +366,7 @@ export default function Profile() {
             {isOwnProfile && (
               <button 
                 onClick={() => navigate('/edit-profile')}
-                className="px-8 py-2.5 rounded-full border border-[var(--vault-line)] bg-[var(--vault-surface)] text-[var(--vault-text)] text-[14px] font-bold tracking-wide flex items-center justify-center active:bg-[var(--vault-line)] transition-colors mt-1 shadow-sm"
+                className="px-8 py-2.5 rounded-full border border-[var(--vault-line)] bg-[var(--vault-surface)] text-[var(--vault-text)] text-[14px] font-bold tracking-wide flex items-center justify-center active:bg-[var(--vault-accent)] active:text-white active:border-[var(--vault-accent)] hover:bg-[var(--vault-accent)] hover:text-white hover:border-[var(--vault-accent)] transition-colors mt-1 shadow-sm"
               >
                 Edit Profile
               </button>
