@@ -304,9 +304,12 @@ export default function Profile() {
             </span>
             <h1 className="text-[22px] font-bold text-[var(--vault-text)] tracking-tight">MitraShare</h1>
           </div>
-          <NavLink to="/profile" className="w-9 h-9 rounded-full bg-[var(--vault-accent)] flex items-center justify-center text-sm font-bold border-2 border-[var(--vault-accent)] shadow-[0_0_15px_rgba(91,79,246,0.4)] text-white shrink-0">
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <NavLink to="/profile" className="w-9 h-9 rounded-full bg-[var(--vault-accent)] flex items-center justify-center text-sm font-bold border-2 border-[var(--vault-accent)] shadow-[0_0_15px_rgba(91,79,246,0.4)] text-white shrink-0">
             {getInitials(user?.name)}
           </NavLink>
+          </div>
         </div>
 
         {/* 1. Identity Section */}
@@ -438,9 +441,7 @@ export default function Profile() {
             {label}
           </NavLink>
         ))}
-        <div className="scholar-mobile-link flex items-center justify-center pt-1">
-          <ThemeToggle />
-        </div>
+        
       </nav>
     </div>
   );

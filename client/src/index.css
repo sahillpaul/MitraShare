@@ -2170,7 +2170,7 @@ body.vault-dark-theme .upload-submit:hover {
     z-index: 30;
     height: 66px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     padding: 4px max(8px, env(safe-area-inset-left)) max(4px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-right));
     background: rgba(255, 255, 255, 0.92);

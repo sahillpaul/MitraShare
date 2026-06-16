@@ -296,9 +296,7 @@ export default function Home() {
               <span>{label}</span>
             </NavLink>
           ))}
-          <div className="scholar-mobile-link flex items-center justify-center">
-            <ThemeToggle />
-          </div>
+          
         </nav>
       </div>
 
@@ -314,9 +312,12 @@ export default function Home() {
             </span>
             <h1 className="text-[22px] font-bold text-[var(--text)] tracking-tight">MitraShare</h1>
           </div>
-          <NavLink to="/profile" className="w-9 h-9 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-bold border-2 border-indigo-500 shadow-[0_0_15px_rgba(79,70,229,0.4)] text-white shrink-0">
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <NavLink to="/profile" className="w-9 h-9 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-bold border-2 border-indigo-500 shadow-[0_0_15px_rgba(79,70,229,0.4)] text-white shrink-0">
             {getInitials(user?.name)}
           </NavLink>
+          </div>
         </div>
 
 
@@ -445,9 +446,7 @@ export default function Home() {
               </NavLink>
             )
           })}
-          <div className="scholar-mobile-link flex items-center justify-center pt-1">
-            <ThemeToggle />
-          </div>
+          
         </nav>
       </div>
     </div>
