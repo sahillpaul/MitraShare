@@ -202,14 +202,14 @@ export default function Login() {
                 onError={() => setError('Google authentication failed.')}
                 theme="filled_black"
                 shape="rectangular"
-                width="334" 
+                width="334"
                 text="signin_with"
               />
             </div>
           </div>
         </div>
       </div>
-      
+
       <div className="absolute bottom-6 text-center w-full text-xs text-neutral-500 font-medium">
         Secured academic vault · CSE Department
       </div>
