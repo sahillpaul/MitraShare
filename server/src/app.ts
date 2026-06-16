@@ -35,10 +35,26 @@ app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 app.post('/api/auth/google', googleLogin);
 
+// Health check endpoint (used by the self-ping keep-alive below)
+app.get('/api/health', (_req, res) => {
+  res.status(200).json({ status: 'alive', timestamp: new Date().toISOString() });
+});
+
 
 // Start Database & Server
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`🚀 MitraShare Server running on port ${PORT}`);
+
+    // KEEP-ALIVE: Ping ourselves every 14 minutes to prevent Render free-tier spin-down
+    const RENDER_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+    setInterval(async () => {
+      try {
+        const res = await fetch(`${RENDER_URL}/api/health`);
+        console.log(`🏓 Keep-alive ping: ${res.status}`);
+      } catch (err) {
+        console.error('🏓 Keep-alive ping failed:', err);
+      }
+    }, 14 * 60 * 1000); // Every 14 minutes (Render sleeps at 15)
   });
 });

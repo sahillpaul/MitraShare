@@ -39,15 +39,25 @@ export default function Profile() {
 
   useEffect(() => {
     fetchProfileData();
-  }, [id]);
+  }, [id, currentUser]);
 
   const fetchProfileData = async () => {
     try {
       setLoading(true);
-      const endpoint = id ? `/api/users/${id}` : '/api/users/me';
-      const res = await axios.get(endpoint);
-      setUser(res.data.user);
-      setMyUploads(res.data.uploads || []);
+
+      if (!id || (currentUser && id === currentUser._id)) {
+        // OWN profile: reuse the already-fetched currentUser from useUser() hook
+        // Only fetch uploads separately to avoid the duplicate /api/users/me call
+        if (!currentUser) return; // Wait for useUser() to resolve first
+        setUser(currentUser);
+        const res = await axios.get('/api/users/me');
+        setMyUploads(res.data.uploads || []);
+      } else {
+        // OTHER user's profile: single call
+        const res = await axios.get(`/api/users/${id}`);
+        setUser(res.data.user);
+        setMyUploads(res.data.uploads || []);
+      }
     } catch (error) {
       console.error("Failed to load profile.");
     } finally {

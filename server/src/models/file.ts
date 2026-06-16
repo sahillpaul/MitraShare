@@ -40,5 +40,9 @@ const fileSchema = new Schema<IFile>({
 fileSchema.index({ title: 'text', subject: 'text' });
 // Prevents duplicate active files
 fileSchema.index({ fileHash: 1, status: 1 }, { unique: true });
+// Fast profile page lookups (covers sort by createdAt)
+fileSchema.index({ uploaderId: 1, createdAt: -1 });
+// Fast semester feed lookups
+fileSchema.index({ semester: 1, status: 1, createdAt: -1 });
 
 export const File = model<IFile>('File', fileSchema);
