@@ -344,7 +344,7 @@ export default function Home() {
       {/* ========================================= */}
       <div className="block md:hidden bg-[var(--page)] text-[var(--text)] min-h-screen pb-24 font-sans absolute inset-0 z-0 overflow-y-auto">
         {/* Header */}
-        <div className="px-5 pt-6 pb-3 flex justify-between items-center">
+        <div className="px-5 pt-6 pb-6 flex justify-between items-center">
           <div className="flex items-center gap-2.5">
             <span className="scholar-brand-mark flex items-center justify-center bg-indigo-600 text-white rounded-md w-[28px] h-[28px] shadow-sm">
               <GraduationCap size={18} strokeWidth={2.5} />
@@ -356,17 +356,7 @@ export default function Home() {
           </NavLink>
         </div>
 
-        {/* Search Bar */}
-        <div className="px-5 mb-6">
-          <div className="bg-[var(--card)] rounded-xl flex items-center px-4 py-3.5 border border-[var(--line)] shadow-sm">
-            <Search size={18} className="text-[var(--muted)] mr-3 shrink-0" />
-            <input
-              type="text"
-              placeholder="Search notes, PYQs, assignments..."
-              className="bg-transparent border-none outline-none text-[15px] text-[var(--text)] w-full placeholder:text-[var(--muted)] font-medium"
-            />
-          </div>
-        </div>
+
 
         {/* Continue Reading */}
         {recentViews.length > 0 && (
