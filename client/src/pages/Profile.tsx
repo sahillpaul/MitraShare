@@ -103,7 +103,7 @@ export default function Profile() {
   const totalUpvotes = myUploads.reduce((sum, file) => sum + (file.upvotes || 0), 0);
   const totalViews = myUploads.reduce((sum, file) => sum + (file.views || 0), 0);
 
-  if (loading) return <div className="vault-shell min-h-screen flex items-center justify-center font-bold text-[var(--vault-muted)]">Loading Dashboard...</div>;
+
 
   return (
     <div className="vault-shell">
@@ -165,6 +165,38 @@ export default function Profile() {
       </nav>
 
       <main className="profile-main hidden md:block">
+        {loading ? (
+          <>
+            <div className="profile-card">
+              <div className="profile-header-top">
+                <div className="profile-user-info w-full flex gap-5 items-center">
+                  <div className="resource-card-loading w-24 h-24 rounded-full shrink-0"></div>
+                  <div className="flex flex-col gap-3 w-full max-w-sm">
+                    <div className="resource-card-loading h-8 w-3/4 rounded-md"></div>
+                    <div className="resource-card-loading h-4 w-1/2 rounded-md"></div>
+                    <div className="resource-card-loading h-4 w-1/3 rounded-md"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="profile-stats-grid">
+                {[1, 2, 3].map(n => (
+                  <div key={n} className="profile-stat-box h-[88px] resource-card-loading border-none shadow-none"></div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="profile-tabs">
+              <div className="profile-tab">{isOwnProfile ? "My Uploads" : "Uploads"}</div>
+            </div>
+
+            <div className="profile-uploads-list">
+              {[1, 2, 3, 4].map(n => (
+                <div key={n} className="profile-upload-item h-[104px] resource-card-loading border-none shadow-none"></div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
         {/* --- PROFILE HEADER & STATS --- */}
         <div className="profile-card">
           <div className="profile-header-top">
@@ -276,6 +308,8 @@ export default function Profile() {
             ))}
           </div>
         )}
+          </>
+        )}
       </main>
 
       {/* ========================================= */}
@@ -302,6 +336,15 @@ export default function Profile() {
         {/* 1. Identity Section */}
         <div className="relative z-10 px-5 pt-6 mb-6">
           <div className="bg-[#141414]/80 backdrop-blur-xl border border-[#262626] rounded-[2rem] p-6 flex flex-col items-center shadow-2xl">
+            {loading ? (
+              <>
+                <div className="w-24 h-24 rounded-full mb-4 resource-card-loading border-none"></div>
+                <div className="h-6 w-40 rounded mb-2 resource-card-loading border-none"></div>
+                <div className="h-4 w-32 rounded mb-5 resource-card-loading border-none"></div>
+                <div className="h-10 w-36 rounded-full mt-1 resource-card-loading border-none"></div>
+              </>
+            ) : (
+              <>
             {/* Avatar */}
             <div className="w-24 h-24 rounded-full bg-[#0A0A0A] flex items-center justify-center text-[32px] font-black text-[#5B4FF6] mb-4 border border-[#262626] shadow-xl relative z-10">
               {getInitials(user?.name)}
@@ -328,11 +371,16 @@ export default function Profile() {
                 Edit Profile
               </button>
             )}
+              </>
+            )}
           </div>
         </div>
 
         {/* 2. Analytics Pill */}
         <div className="relative z-10 px-5 mb-8">
+          {loading ? (
+            <div className="h-[84px] rounded-full w-full resource-card-loading border-none shadow-none"></div>
+          ) : (
           <div className="flex justify-between items-center bg-[#1A1A1A] rounded-full py-4 px-6 shadow-lg border border-[#262626]/50">
             <div className="flex flex-col items-center flex-1">
               <span className="text-[26px] font-black text-white leading-none mb-1">{totalUploads}</span>
@@ -347,13 +395,20 @@ export default function Profile() {
               <span className="text-[10px] font-bold text-[#A1A1AA] tracking-[0.05em] uppercase">Views</span>
             </div>
           </div>
+          )}
         </div>
 
         {/* 3. Content Area */}
         <div className="px-5">
           <h2 className="text-[18px] font-extrabold text-white mb-6">{isOwnProfile ? 'My Contributions' : 'Contributions'}</h2>
           
-          {myUploads.length === 0 ? (
+          {loading ? (
+            <div className="flex flex-col gap-4">
+              {[1, 2, 3, 4].map(n => (
+                <div key={n} className="bg-[#141414] border-none rounded-xl h-[116px] resource-card-loading shadow-none"></div>
+              ))}
+            </div>
+          ) : myUploads.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-10">
               <UploadCloud size={48} strokeWidth={1.5} className="text-[#3b3b40] mb-2" />
               <p className="text-[#A1A1AA] text-[15px] font-bold mb-1">No uploads yet</p>
