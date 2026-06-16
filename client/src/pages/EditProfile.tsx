@@ -67,7 +67,7 @@ export default function EditProfile() {
     navigate('/login');
   };
 
-  if (loading) return <div className="vault-shell min-h-screen flex items-center justify-center font-bold text-[var(--vault-muted)]">Loading Settings...</div>;
+
 
   return (
     <div className="vault-shell edit-profile-page">
@@ -98,6 +98,42 @@ export default function EditProfile() {
 
       <main className="edit-profile-main">
         <div className="profile-card edit-profile-container">
+          {loading ? (
+            <>
+              <div className="edit-profile-header">
+                <div className="resource-card-loading w-24 h-24 rounded-full mb-4 border-none shadow-none mx-auto"></div>
+                <div className="resource-card-loading h-8 w-48 rounded-md mb-2 border-none shadow-none mx-auto"></div>
+                <div className="resource-card-loading h-4 w-32 rounded-md border-none shadow-none mx-auto"></div>
+              </div>
+
+              <div className="edit-profile-form">
+                <div className="edit-profile-field">
+                  <div className="resource-card-loading h-4 w-24 rounded-md mb-2 border-none shadow-none"></div>
+                  <div className="resource-card-loading h-[46px] w-full rounded-xl border-none shadow-none"></div>
+                </div>
+
+                <div className="edit-profile-field">
+                  <div className="resource-card-loading h-4 w-32 rounded-md mb-2 border-none shadow-none"></div>
+                  <div className="resource-card-loading h-[46px] w-full rounded-xl border-none shadow-none"></div>
+                </div>
+
+                <div className="edit-profile-field">
+                  <div className="resource-card-loading h-4 w-36 rounded-md mb-2 border-none shadow-none"></div>
+                  <div className="resource-card-loading h-[46px] w-full rounded-xl border-none shadow-none"></div>
+                </div>
+
+                <div className="edit-profile-actions flex gap-4">
+                  <div className="resource-card-loading h-11 w-full rounded-full border-none shadow-none"></div>
+                  <div className="resource-card-loading h-11 w-full rounded-full border-none shadow-none"></div>
+                </div>
+                
+                <div className="edit-profile-logout-wrap mt-6">
+                  <div className="resource-card-loading h-[42px] w-[120px] rounded-full border-none shadow-none mx-auto"></div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
           <div className="edit-profile-header">
             <div className="profile-avatar-large edit-profile-avatar">
               {getInitials(formData.name || user?.name)}
@@ -174,6 +210,8 @@ export default function EditProfile() {
               </button>
             </div>
           </div>
+            </>
+          )}
         </div>
       </main>
     </div>
