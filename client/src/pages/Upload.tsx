@@ -234,24 +234,42 @@ export default function Upload() {
       {/* DESKTOP LAYOUT                            */}
       {/* ========================================= */}
       <div className="hidden md:block">
-        <nav className="scholar-topbar">
-          <NavLink to="/home" className="scholar-brand">
-            <span className="scholar-brand-mark"><GraduationCap size={21} strokeWidth={2.35} /></span>
-            <span>MitraShare</span>
+                <nav className="flex items-center justify-between w-full h-[72px] px-6 bg-[var(--card)]/90 backdrop-blur-md border-b border-[var(--line)] sticky top-0 z-20">
+          {/* Left Zone: Logo */}
+          <NavLink to="/home" className="flex items-center gap-3 text-[22px] font-extrabold tracking-tight flex-shrink-0 w-48">
+            <span className="w-10 h-10 flex items-center justify-center text-white bg-[var(--accent)] rounded-[10px] shadow-lg shadow-[var(--accent)]/30"><GraduationCap size={22} strokeWidth={2.35} /></span>
+            <span className="text-[var(--text)]">MitraShare</span>
           </NavLink>
-          <div className="scholar-nav-list">
+
+          {/* Center Zone: Navigation Links */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-8">
             {navItems.map(({ label, to, icon: Icon }) => (
-              <NavLink key={label} to={to} className={`scholar-nav-link ${label === 'Upload' ? 'active' : ''}`}>
-                <Icon size={18} strokeWidth={2.1} /><span>{label}</span>
+              <NavLink 
+                key={label} 
+                to={to} 
+                className={({ isActive }) => 
+                  `flex items-center gap-2 text-[15px] font-bold px-4 py-2.5 rounded-xl transition-all duration-200 ${
+                    isActive 
+                      ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-500/15 dark:text-indigo-400' 
+                      : 'text-[var(--muted)] hover:bg-[var(--line)] hover:text-[var(--text)]'
+                  }`
+                }
+              >
+                <Icon size={18} strokeWidth={2.2} />
+                <span>{label}</span>
               </NavLink>
             ))}
-            <div className="scholar-nav-link" style={{ paddingLeft: '12px' }}>
-              <ThemeToggle />
-            </div>
           </div>
-          <NavLink to="/profile" className="scholar-topbar-profile">
-            <div className="scholar-avatar-initials">{getInitials(user?.name)}</div>
-          </NavLink>
+
+          {/* Right Zone: Utilities */}
+          <div className="flex items-center justify-end gap-5 flex-shrink-0 w-48">
+            <ThemeToggle />
+            <NavLink to="/profile" className="flex-shrink-0 transition-transform hover:scale-105 active:scale-95">
+              <div className="w-[42px] h-[42px] flex items-center justify-center text-white bg-[var(--accent)] border-2 border-[var(--line)] rounded-full text-[14px] font-extrabold shadow-sm">
+                {getInitials(user?.name)}
+              </div>
+            </NavLink>
+          </div>
         </nav>
 
         <main className="upload-main">
