@@ -3,19 +3,18 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 import {
-  Bell,
+  ,
   Eye,
   FileText,
   GraduationCap,
   Home as HomeIcon,
-  Moon,
+  ,
   Search,
-  Settings,
-  Sun,
+  ,
+  ,
   ThumbsUp,
   UploadCloud,
-  X
-} from 'lucide-react';
+  } from 'lucide-react';
 import { timeAgo } from '../lib/formatTime';
 import { getRecentViews, saveRecentView } from '../lib/recentViews';
 import type { RecentFile } from '../lib/recentViews';

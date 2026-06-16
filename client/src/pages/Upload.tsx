@@ -6,7 +6,7 @@ import { calculateFileHash } from '../lib/hasher';
 import { subjectsMap } from '../lib/constants';
 import {
   UploadCloud, CheckCircle, GraduationCap,
-  Home as HomeIcon, Search, Settings, ChevronDown, Loader2, User, Moon, Sun, Bell, X,
+  Home as HomeIcon, Search, , ChevronDown, Loader2, User, , , , ,
   CalendarDays, BookOpen, Type, ShieldCheck,
   FileText, Clock, FileDigit, AlertTriangle, ArrowLeft, Check
 } from 'lucide-react';
@@ -16,6 +16,7 @@ const navItems = [
   { label: 'Home', to: '/home', icon: HomeIcon },
   { label: 'Browse', to: '/library', icon: Search },
   { label: 'Upload', to: '/upload', icon: UploadCloud },
+];
 
 const categories = ['Notes', 'PYQ', 'Question Bank'];
 

@@ -3,9 +3,8 @@ import axios from 'axios';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 import {
-  GraduationCap, Home as HomeIcon, Search, UploadCloud, Settings,
-  Trash2, Eye, ThumbsUp, MapPin, Edit3, X, Sun, Moon, Bell
-} from 'lucide-react';
+  GraduationCap, Home as HomeIcon, Search, UploadCloud, ,
+  Trash2, Eye, ThumbsUp, MapPin, Edit3, , , , } from 'lucide-react';
 import { timeAgo } from '../lib/formatTime';
 import { useUser, getInitials } from '../lib/user';
 
@@ -13,6 +12,7 @@ const navItems = [
   { label: 'Home', to: '/home', icon: HomeIcon },
   { label: 'Browse', to: '/library', icon: Search },
   { label: 'Upload', to: '/upload', icon: UploadCloud },
+];
 
 export default function Profile() {
   const navigate = useNavigate();
