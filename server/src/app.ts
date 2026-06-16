@@ -19,7 +19,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ 
   origin: [
     'http://localhost:5173',
-    'https://mitrashare.vercel.app'
+    'https://mitrashare.vercel.app',
+    'https://mitrashare-sahilpaul046-1342s-projects.vercel.app'
   ], 
   credentials: true 
 })); // Allows your Vite frontend to talk to this backend with cookies
