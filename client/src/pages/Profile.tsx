@@ -315,27 +315,27 @@ export default function Profile() {
       {/* ========================================= */}
       {/* MOBILE LAYOUT                             */}
       {/* ========================================= */}
-      <div className="block md:hidden bg-[#0A0A0A] text-white min-h-screen pb-24 font-sans absolute inset-0 z-0 overflow-y-auto relative">
+      <div className="block md:hidden bg-[var(--vault-bg)] text-[var(--vault-text)] min-h-screen pb-24 font-sans absolute inset-0 z-0 overflow-y-auto relative">
         
         {/* HALO GLOW */}
-        <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-[#5B4FF6]/20 blur-[100px] rounded-full pointer-events-none z-0"></div>
+        <div className="absolute top-[-80px] left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-[var(--vault-accent)]/20 blur-[100px] rounded-full pointer-events-none z-0"></div>
 
         {/* Header */}
         <div className="relative z-10 px-5 pt-6 pb-2 flex justify-between items-center bg-transparent">
           <div className="flex items-center gap-2.5">
-            <span className="scholar-brand-mark flex items-center justify-center bg-[#5B4FF6] text-white rounded-md w-[28px] h-[28px] shadow-sm">
+            <span className="scholar-brand-mark flex items-center justify-center bg-[var(--vault-accent)] text-white rounded-md w-[28px] h-[28px] shadow-sm">
               <GraduationCap size={18} strokeWidth={2.5} />
             </span>
-            <h1 className="text-[22px] font-bold text-white tracking-tight">MitraShare</h1>
+            <h1 className="text-[22px] font-bold text-[var(--vault-text)] tracking-tight">MitraShare</h1>
           </div>
-          <NavLink to="/profile" className="w-9 h-9 rounded-full bg-[#5B4FF6] flex items-center justify-center text-sm font-bold border-2 border-[#5B4FF6] shadow-[0_0_15px_rgba(91,79,246,0.4)] text-white shrink-0">
+          <NavLink to="/profile" className="w-9 h-9 rounded-full bg-[var(--vault-accent)] flex items-center justify-center text-sm font-bold border-2 border-[var(--vault-accent)] shadow-[0_0_15px_rgba(91,79,246,0.4)] text-white shrink-0">
             {getInitials(user?.name)}
           </NavLink>
         </div>
 
         {/* 1. Identity Section */}
         <div className="relative z-10 px-5 pt-6 mb-6">
-          <div className="bg-[#141414]/80 backdrop-blur-xl border border-[#262626] rounded-[2rem] p-6 flex flex-col items-center shadow-2xl">
+          <div className="bg-[var(--vault-card)]/80 backdrop-blur-xl border border-[var(--vault-line)] rounded-[2rem] p-6 flex flex-col items-center shadow-lg">
             {loading ? (
               <>
                 <div className="w-24 h-24 rounded-full mb-4 resource-card-loading border-none"></div>
@@ -346,27 +346,27 @@ export default function Profile() {
             ) : (
               <>
             {/* Avatar */}
-            <div className="w-24 h-24 rounded-full bg-[#0A0A0A] flex items-center justify-center text-[32px] font-black text-[#5B4FF6] mb-4 border border-[#262626] shadow-xl relative z-10">
+            <div className="w-24 h-24 rounded-full bg-[var(--vault-bg)] flex items-center justify-center text-[32px] font-black text-[var(--vault-accent)] mb-4 border border-[var(--vault-line)] shadow-xl relative z-10">
               {getInitials(user?.name)}
             </div>
             
             {/* Name Row */}
             <div className="flex items-center justify-center gap-2 mb-1 w-full">
-              <h1 className="text-[22px] font-bold text-white tracking-tight">{user?.name || 'Sahil Paul'}</h1>
-              <span className="bg-[#5B4FF6]/15 text-[#5B4FF6] text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider">ACTIVE</span>
+              <h1 className="text-[22px] font-bold text-[var(--vault-text)] tracking-tight">{user?.name || 'Sahil Paul'}</h1>
+              <span className="bg-[var(--vault-accent)]/15 text-[var(--vault-accent)] text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider">ACTIVE</span>
             </div>
             
             {/* Meta-Data */}
             <div className="flex flex-col items-center gap-0.5 mb-5">
-              <p className="text-[#A1A1AA] text-[13px] font-medium tracking-wide">Sem {user?.semester || '1'} • {user?.course || 'Computer Science'}</p>
-              <p className="text-[#A1A1AA] text-[13px] font-medium tracking-wide">{user?.email || 'sahilpaul046@gmail.com'}</p>
+              <p className="text-[var(--vault-muted)] text-[13px] font-medium tracking-wide">Sem {user?.semester || '1'} • {user?.course || 'Computer Science'}</p>
+              <p className="text-[var(--vault-muted)] text-[13px] font-medium tracking-wide">{user?.email || 'sahilpaul046@gmail.com'}</p>
             </div>
             
             {/* Action */}
             {isOwnProfile && (
               <button 
                 onClick={() => navigate('/edit-profile')}
-                className="px-8 py-2.5 rounded-full border border-[#3b3b40] bg-[#1A1A1A] text-white text-[14px] font-bold tracking-wide flex items-center justify-center active:bg-[#262626] transition-colors mt-1"
+                className="px-8 py-2.5 rounded-full border border-[var(--vault-line)] bg-[var(--vault-surface)] text-[var(--vault-text)] text-[14px] font-bold tracking-wide flex items-center justify-center active:bg-[var(--vault-line)] transition-colors mt-1 shadow-sm"
               >
                 Edit Profile
               </button>
@@ -381,18 +381,18 @@ export default function Profile() {
           {loading ? (
             <div className="h-[84px] rounded-full w-full resource-card-loading border-none shadow-none"></div>
           ) : (
-          <div className="flex justify-between items-center bg-[#1A1A1A] rounded-full py-4 px-6 shadow-lg border border-[#262626]/50">
+          <div className="flex justify-between items-center bg-[var(--vault-card)] rounded-full py-4 px-6 shadow-md border border-[var(--vault-line)]">
             <div className="flex flex-col items-center flex-1">
-              <span className="text-[26px] font-black text-white leading-none mb-1">{totalUploads}</span>
-              <span className="text-[10px] font-bold text-[#A1A1AA] tracking-[0.05em] uppercase">Uploads</span>
+              <span className="text-[26px] font-black text-[var(--vault-text)] leading-none mb-1">{totalUploads}</span>
+              <span className="text-[10px] font-bold text-[var(--vault-muted)] tracking-[0.05em] uppercase">Uploads</span>
             </div>
             <div className="flex flex-col items-center flex-1">
-              <span className="text-[26px] font-black text-[#5B4FF6] leading-none mb-1">{totalUpvotes}</span>
-              <span className="text-[10px] font-bold text-[#A1A1AA] tracking-[0.05em] uppercase">Upvotes</span>
+              <span className="text-[26px] font-black text-[var(--vault-accent)] leading-none mb-1">{totalUpvotes}</span>
+              <span className="text-[10px] font-bold text-[var(--vault-muted)] tracking-[0.05em] uppercase">Upvotes</span>
             </div>
             <div className="flex flex-col items-center flex-1">
-              <span className="text-[26px] font-black text-white leading-none mb-1">{totalViews > 999 ? (totalViews/1000).toFixed(1) + 'k' : totalViews}</span>
-              <span className="text-[10px] font-bold text-[#A1A1AA] tracking-[0.05em] uppercase">Views</span>
+              <span className="text-[26px] font-black text-[var(--vault-text)] leading-none mb-1">{totalViews > 999 ? (totalViews/1000).toFixed(1) + 'k' : totalViews}</span>
+              <span className="text-[10px] font-bold text-[var(--vault-muted)] tracking-[0.05em] uppercase">Views</span>
             </div>
           </div>
           )}
@@ -400,44 +400,44 @@ export default function Profile() {
 
         {/* 3. Content Area */}
         <div className="px-5">
-          <h2 className="text-[18px] font-extrabold text-white mb-6">{isOwnProfile ? 'My Contributions' : 'Contributions'}</h2>
+          <h2 className="text-[18px] font-extrabold text-[var(--vault-text)] mb-6">{isOwnProfile ? 'My Contributions' : 'Contributions'}</h2>
           
           {loading ? (
             <div className="flex flex-col gap-4">
               {[1, 2, 3, 4].map(n => (
-                <div key={n} className="bg-[#141414] border-none rounded-xl h-[116px] resource-card-loading shadow-none"></div>
+                <div key={n} className="bg-[var(--vault-card)] border-none rounded-xl h-[116px] resource-card-loading shadow-sm"></div>
               ))}
             </div>
           ) : myUploads.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-10">
-              <UploadCloud size={48} strokeWidth={1.5} className="text-[#3b3b40] mb-2" />
-              <p className="text-[#A1A1AA] text-[15px] font-bold mb-1">No uploads yet</p>
-              <p className="text-[#A1A1AA] text-[13px] opacity-70 text-center">{isOwnProfile ? 'Head to the Upload tab to start contributing.' : "This user hasn't uploaded anything yet."}</p>
+              <UploadCloud size={48} strokeWidth={1.5} className="text-[var(--vault-muted)] opacity-50 mb-2" />
+              <p className="text-[var(--vault-muted)] text-[15px] font-bold mb-1">No uploads yet</p>
+              <p className="text-[var(--vault-muted)] text-[13px] opacity-70 text-center">{isOwnProfile ? 'Head to the Upload tab to start contributing.' : "This user hasn't uploaded anything yet."}</p>
             </div>
           ) : (
             <div className="flex flex-col gap-4">
                {myUploads.map(file => (
-                  <div key={file._id} className="bg-[#141414] border border-[#262626] rounded-xl p-4 flex flex-col gap-3">
+                  <div key={file._id} className="bg-[var(--vault-card)] border border-[var(--vault-line)] rounded-xl p-4 flex flex-col gap-3 shadow-sm">
                     <div className="flex justify-between items-start gap-3">
                       <div className="flex-1 min-w-0">
-                         <h3 className="text-[15px] font-bold text-white truncate">{file.title}</h3>
-                         <p className="text-[12px] font-bold text-[#A1A1AA] mt-1 uppercase tracking-wider">{file.subject}</p>
+                         <h3 className="text-[15px] font-bold text-[var(--vault-text)] truncate">{file.title}</h3>
+                         <p className="text-[12px] font-bold text-[var(--vault-muted)] mt-1 uppercase tracking-wider">{file.subject}</p>
                       </div>
-                      <span className="bg-[#262626] text-[#A1A1AA] text-[10px] font-bold px-2 py-1 rounded">
+                      <span className="bg-[var(--vault-line)] text-[var(--vault-muted)] text-[10px] font-bold px-2 py-1 rounded">
                          {getFileBadge(file.fileUrl)}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between mt-2 pt-3 border-t border-[#262626]/50">
+                    <div className="flex items-center justify-between mt-2 pt-3 border-t border-[var(--vault-line)]">
                       <div className="flex gap-4">
-                        <span className="flex items-center gap-1.5 text-[12px] font-bold text-[#A1A1AA]">
+                        <span className="flex items-center gap-1.5 text-[12px] font-bold text-[var(--vault-muted)]">
                           <Eye size={14} strokeWidth={2.5} /> {file.views || 0}
                         </span>
-                        <span className="flex items-center gap-1.5 text-[12px] font-bold text-[#A1A1AA]">
+                        <span className="flex items-center gap-1.5 text-[12px] font-bold text-[var(--vault-muted)]">
                           <ThumbsUp size={14} strokeWidth={2.5} /> {file.upvotes || 0}
                         </span>
                       </div>
                       <div className="flex gap-2">
-                         <button onClick={() => handleViewFile(file._id)} className="w-8 h-8 rounded-full bg-[#262626] text-white flex items-center justify-center active:scale-95 transition-transform">
+                         <button onClick={() => handleViewFile(file._id)} className="w-8 h-8 rounded-full bg-[var(--vault-line)] text-[var(--vault-text)] flex items-center justify-center active:scale-95 transition-transform hover:bg-[var(--vault-muted)] hover:text-white">
                            <Eye size={14} strokeWidth={2.5} />
                          </button>
                          {isOwnProfile && (
