@@ -485,7 +485,7 @@ export default function Upload() {
           <form onSubmit={handleUploadClick}>
             {/* Tap to Upload Zone */}
             <div
-              className={`w-full border-2 border-dashed rounded-xl p-4 mb-6 flex flex-col items-center justify-center cursor-pointer transition-colors ${file ? 'border-indigo-500 bg-indigo-500/10' : theme === 'dark' ? 'border-indigo-500/50 bg-indigo-500/10 hover:border-indigo-400' : 'border-indigo-200 bg-indigo-50/50 hover:border-indigo-400'}`}
+              className={`w-full border-2 border-dashed rounded-xl p-4 mb-6 flex flex-col items-center justify-center cursor-pointer transition-colors ${file ? 'border-indigo-500 bg-indigo-500/10' : 'border-indigo-200 bg-indigo-50/50 hover:border-indigo-400 dark:border-indigo-500/50 dark:bg-indigo-500/10'}`}
               onClick={() => document.getElementById('file-upload-mobile')?.click()}
             >
               <input
@@ -511,7 +511,7 @@ export default function Upload() {
                 </div>
               ) : (
                 <div className="flex items-center gap-3 w-full justify-center py-2">
-                  <UploadCloud size={20} className={theme === 'dark' ? "text-indigo-500" : "text-indigo-400"} strokeWidth={2.5} />
+                  <UploadCloud size={20} className="text-indigo-400 dark:text-indigo-500" strokeWidth={2.5} />
                   <span className="text-[15px] font-semibold text-[var(--text)]">Tap to Select PDF</span>
                 </div>
               )}
@@ -540,7 +540,7 @@ export default function Upload() {
               <div>
                 <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Semester</label>
                 <div className="relative">
-                  <div className={`absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                      <CalendarDays size={18} strokeWidth={2.2} />
                   </div>
                   <select
@@ -555,7 +555,7 @@ export default function Upload() {
                     <option value="" disabled hidden>Select Semester</option>
                     {[1,2,3,4,5,6,7,8].map(n => <option key={n} value={n}>Semester {n}</option>)}
                   </select>
-                  <div className={`absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                  <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                      <ChevronDown size={18} strokeWidth={2.5} />
                   </div>
                 </div>
@@ -564,7 +564,7 @@ export default function Upload() {
               <div>
                 <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Subject</label>
                 <div className="relative">
-                  <div className={`absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                      <BookOpen size={18} strokeWidth={2.2} />
                   </div>
                   <select
@@ -578,7 +578,7 @@ export default function Upload() {
                       <option key={sub} value={sub}>{sub}</option>
                     ))}
                   </select>
-                  <div className={`absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                  <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                      <ChevronDown size={18} strokeWidth={2.5} />
                   </div>
                 </div>
@@ -589,7 +589,7 @@ export default function Upload() {
                   <div>
                     <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Exam Type</label>
                     <div className="relative animate-in fade-in zoom-in-95 duration-200">
-                      <div className={`absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                          <FileText size={18} strokeWidth={2.2} />
                       </div>
                       <select
@@ -601,7 +601,7 @@ export default function Upload() {
                         <option value="Mid Sem">Mid Sem</option>
                         <option value="End Sem">End Sem</option>
                       </select>
-                      <div className={`absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                      <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                          <ChevronDown size={18} strokeWidth={2.5} />
                       </div>
                     </div>
@@ -610,7 +610,7 @@ export default function Upload() {
                   <div>
                     <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Academic Year</label>
                     <div className="relative animate-in fade-in zoom-in-95 duration-200">
-                      <div className={`absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                          <Clock size={18} strokeWidth={2.2} />
                       </div>
                       <select
@@ -621,7 +621,7 @@ export default function Upload() {
                         <option value="" disabled hidden>Select Academic Year</option>
                         {recentYears.map(y => <option key={y} value={y}>{y}</option>)}
                       </select>
-                      <div className={`absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                      <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                          <ChevronDown size={18} strokeWidth={2.5} />
                       </div>
                     </div>
@@ -633,7 +633,7 @@ export default function Upload() {
                 <div>
                   <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">{category === 'Notes' ? 'Document Title' : 'Question Bank Title'}</label>
                   <div className="relative animate-in fade-in zoom-in-95 duration-200">
-                    <div className={`absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                        <Type size={18} strokeWidth={2.2} />
                     </div>
                     <input
@@ -652,7 +652,7 @@ export default function Upload() {
                 <div>
                   <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Faculty Name</label>
                   <div className="relative animate-in fade-in zoom-in-95 duration-200">
-                    <div className={`absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none ${theme === 'dark' ? 'text-[#A1A1AA]' : 'text-[var(--muted)]'}`}>
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
                        <User size={18} strokeWidth={2.2} />
                     </div>
                     <input
