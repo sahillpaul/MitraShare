@@ -21,9 +21,11 @@ export const googleLogin = async (req: Request, res: Response): Promise<any> => 
 
     // 2. Check if user already exists in MongoDB
     let user = await User.findOne({ email: payload.email });
+    let isNewUser = false;
 
     // 3. If user DOES NOT exist, check for the invite code
     if (!user) {
+      isNewUser = true;
       // Create the new user.
       user = await User.create({
         name: payload.name || payload.email,
@@ -48,7 +50,7 @@ export const googleLogin = async (req: Request, res: Response): Promise<any> => 
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
-    return res.status(200).json({ message: "Login successful" });
+    return res.status(200).json({ message: "Login successful", isNewUser });
 
   } catch (error) {
     console.error("Auth Error:", error);

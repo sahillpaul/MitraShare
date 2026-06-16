@@ -43,9 +43,13 @@ export default function Login() {
 
   const handleGoogleSuccess = async (credentialResponse: any) => {
     try {
-      await axios.post('/api/auth/google', { token: credentialResponse.credential });
+      const response = await axios.post('/api/auth/google', { token: credentialResponse.credential });
       localStorage.setItem('isAuthenticated', 'true');
-      navigate('/home');
+      if (response.data.isNewUser) {
+        navigate('/onboarding');
+      } else {
+        navigate('/home');
+      }
     } catch (err: any) {
       const apiErr = err.response?.data?.error;
       setError(typeof apiErr === 'string' ? apiErr : "Google authentication failed.");

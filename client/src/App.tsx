@@ -6,6 +6,7 @@ import Upload from './pages/Upload';
 import Library from './pages/Library';
 import Profile from './pages/Profile';
 import EditProfile from './pages/EditProfile';
+import Onboarding from './pages/Onboarding';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
 
         {/* Protected Routes (Only accessible if logged in) */}
         <Route element={<ProtectedRoute />}>
+          <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/home" element={<Home />} />
           <Route path="/upload" element={<Upload />} />
           {/* We will add /upload, /library, and /profile inside here later! */}
