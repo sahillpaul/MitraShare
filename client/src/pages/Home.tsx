@@ -3,18 +3,14 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 import {
-  ,
   Eye,
   FileText,
   GraduationCap,
   Home as HomeIcon,
-  ,
   Search,
-  ,
-  ,
   ThumbsUp,
   UploadCloud,
-  } from 'lucide-react';
+} from 'lucide-react';
 import { timeAgo } from '../lib/formatTime';
 import { getRecentViews, saveRecentView } from '../lib/recentViews';
 import type { RecentFile } from '../lib/recentViews';
@@ -277,10 +273,10 @@ export default function Home() {
 
         <nav className="scholar-mobile-nav" aria-label="Mobile navigation">
           {navItems.map(({ label, to, icon: Icon }) => (
-              <NavLink key={label} to={to} className="scholar-mobile-link focus:outline-none focus-visible:text-indigo-400">
-                <Icon size={21} strokeWidth={2.15} />
-                <span>{label}</span>
-              </NavLink>
+            <NavLink key={label} to={to} className="scholar-mobile-link focus:outline-none focus-visible:text-indigo-400">
+              <Icon size={21} strokeWidth={2.15} />
+              <span>{label}</span>
+            </NavLink>
           ))}
           <div className="scholar-mobile-link flex items-center justify-center">
             <ThemeToggle />

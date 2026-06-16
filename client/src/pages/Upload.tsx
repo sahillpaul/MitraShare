@@ -6,7 +6,7 @@ import { calculateFileHash } from '../lib/hasher';
 import { subjectsMap } from '../lib/constants';
 import {
   UploadCloud, CheckCircle, GraduationCap,
-  Home as HomeIcon, Search, , ChevronDown, Loader2, User, , , , ,
+  Home as HomeIcon, Search, ChevronDown, Loader2, User,
   CalendarDays, BookOpen, Type, ShieldCheck,
   FileText, Clock, FileDigit, AlertTriangle, ArrowLeft, Check
 } from 'lucide-react';
@@ -147,10 +147,10 @@ export default function Upload() {
 
   const renderConfirmModal = () => {
     if (!showConfirm || !file) return null;
-    
+
     const today = new Date();
     const formattedDate = today.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-    
+
     return (
       <div className="upload-modal-overlay">
         <div className="upload-modal">
@@ -159,7 +159,7 @@ export default function Upload() {
           </div>
           <h2 className="upload-modal-title">Confirm Upload Details</h2>
           <p className="upload-modal-subtitle">
-            Please review your resource information before publishing.<br/>
+            Please review your resource information before publishing.<br />
             Once submitted, some details cannot be changed.
           </p>
 
@@ -168,11 +168,11 @@ export default function Upload() {
             <div className="upload-receipt-body">
               <div className="upload-receipt-row">
                 <span className="upload-receipt-label"><FileText size={16} /> Resource Type</span>
-                <span className="upload-receipt-value"><FileText size={16} style={{color: "var(--accent)"}} /> {category}</span>
+                <span className="upload-receipt-value"><FileText size={16} style={{ color: "var(--accent)" }} /> {category}</span>
               </div>
               <div className="upload-receipt-row">
                 <span className="upload-receipt-label"><FileText size={16} /> File Name</span>
-                <span className="upload-receipt-value" style={{color: "var(--accent)"}}><FileText size={16} /> {file.name}</span>
+                <span className="upload-receipt-value" style={{ color: "var(--accent)" }}><FileText size={16} /> {file.name}</span>
               </div>
               <div className="upload-receipt-row">
                 <span className="upload-receipt-label"><GraduationCap size={16} /> Semester</span>
@@ -336,7 +336,7 @@ export default function Upload() {
                     }}
                   >
                     <option value="" disabled hidden>Select Semester</option>
-                    {[1,2,3,4,5,6,7,8].map(n => <option key={n} value={n}>Semester {n}</option>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>Semester {n}</option>)}
                   </select>
                   <ChevronDown size={16} strokeWidth={2.5} className="upload-select-icon" />
                 </div>
@@ -389,7 +389,7 @@ export default function Upload() {
                 )}
 
                 {(category === 'Notes' || category === 'Question Bank') && (
-                  <div 
+                  <div
                     className="upload-input-wrap animate-in fade-in slide-in-from-top-2"
                     style={category === 'Notes' ? { gridColumn: '1 / -1' } : {}}
                   >
@@ -452,9 +452,9 @@ export default function Upload() {
 
         <nav className="scholar-mobile-nav">
           {navItems.map(({ label, to, icon: Icon }) => (
-              <NavLink key={label} to={to} className={`scholar-mobile-link focus:outline-none ${label === 'Upload' ? 'active' : ''}`}>
-                <Icon size={21} strokeWidth={2.15} /><span>{label}</span>
-              </NavLink>
+            <NavLink key={label} to={to} className={`scholar-mobile-link focus:outline-none ${label === 'Upload' ? 'active' : ''}`}>
+              <Icon size={21} strokeWidth={2.15} /><span>{label}</span>
+            </NavLink>
           ))}
           <div className="scholar-mobile-link flex items-center justify-center">
             <ThemeToggle />
@@ -537,12 +537,12 @@ export default function Upload() {
 
             {/* Details Form (Vertical Full-Width Inputs) */}
             <div className="flex flex-col gap-3.5">
-              
+
               <div>
                 <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Semester</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                     <CalendarDays size={18} strokeWidth={2.2} />
+                    <CalendarDays size={18} strokeWidth={2.2} />
                   </div>
                   <select
                     className="w-full bg-[var(--card)] border border-[var(--line)] rounded-xl py-3.5 pl-[42px] pr-10 text-[15px] text-[var(--text)] appearance-none outline-none focus:border-indigo-500 font-medium"
@@ -554,10 +554,10 @@ export default function Upload() {
                     }}
                   >
                     <option value="" disabled hidden>Select Semester</option>
-                    {[1,2,3,4,5,6,7,8].map(n => <option key={n} value={n}>Semester {n}</option>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map(n => <option key={n} value={n}>Semester {n}</option>)}
                   </select>
                   <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                     <ChevronDown size={18} strokeWidth={2.5} />
+                    <ChevronDown size={18} strokeWidth={2.5} />
                   </div>
                 </div>
               </div>
@@ -566,7 +566,7 @@ export default function Upload() {
                 <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Subject</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                     <BookOpen size={18} strokeWidth={2.2} />
+                    <BookOpen size={18} strokeWidth={2.2} />
                   </div>
                   <select
                     className="w-full bg-[var(--card)] border border-[var(--line)] rounded-xl py-3.5 pl-[42px] pr-10 text-[15px] text-[var(--text)] appearance-none outline-none focus:border-indigo-500 font-medium disabled:opacity-50"
@@ -580,7 +580,7 @@ export default function Upload() {
                     ))}
                   </select>
                   <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                     <ChevronDown size={18} strokeWidth={2.5} />
+                    <ChevronDown size={18} strokeWidth={2.5} />
                   </div>
                 </div>
               </div>
@@ -591,7 +591,7 @@ export default function Upload() {
                     <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Exam Type</label>
                     <div className="relative animate-in fade-in zoom-in-95 duration-200">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                         <FileText size={18} strokeWidth={2.2} />
+                        <FileText size={18} strokeWidth={2.2} />
                       </div>
                       <select
                         className="w-full bg-[var(--card)] border border-[var(--line)] rounded-xl py-3.5 pl-[42px] pr-10 text-[15px] text-[var(--text)] appearance-none outline-none focus:border-indigo-500 font-medium"
@@ -603,7 +603,7 @@ export default function Upload() {
                         <option value="End Sem">End Sem</option>
                       </select>
                       <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                         <ChevronDown size={18} strokeWidth={2.5} />
+                        <ChevronDown size={18} strokeWidth={2.5} />
                       </div>
                     </div>
                   </div>
@@ -612,7 +612,7 @@ export default function Upload() {
                     <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Academic Year</label>
                     <div className="relative animate-in fade-in zoom-in-95 duration-200">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                         <Clock size={18} strokeWidth={2.2} />
+                        <Clock size={18} strokeWidth={2.2} />
                       </div>
                       <select
                         className="w-full bg-[var(--card)] border border-[var(--line)] rounded-xl py-3.5 pl-[42px] pr-10 text-[15px] text-[var(--text)] appearance-none outline-none focus:border-indigo-500 font-medium"
@@ -623,7 +623,7 @@ export default function Upload() {
                         {recentYears.map(y => <option key={y} value={y}>{y}</option>)}
                       </select>
                       <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                         <ChevronDown size={18} strokeWidth={2.5} />
+                        <ChevronDown size={18} strokeWidth={2.5} />
                       </div>
                     </div>
                   </div>
@@ -635,7 +635,7 @@ export default function Upload() {
                   <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">{category === 'Notes' ? 'Document Title' : 'Question Bank Title'}</label>
                   <div className="relative animate-in fade-in zoom-in-95 duration-200">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                       <Type size={18} strokeWidth={2.2} />
+                      <Type size={18} strokeWidth={2.2} />
                     </div>
                     <input
                       type="text"
@@ -654,7 +654,7 @@ export default function Upload() {
                   <label className="block text-[11px] font-bold tracking-[0.05em] text-[var(--muted)] uppercase mb-1.5 px-1">Faculty Name</label>
                   <div className="relative animate-in fade-in zoom-in-95 duration-200">
                     <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[var(--muted)] dark:text-[#A1A1AA]">
-                       <User size={18} strokeWidth={2.2} />
+                      <User size={18} strokeWidth={2.2} />
                     </div>
                     <input
                       type="text"
