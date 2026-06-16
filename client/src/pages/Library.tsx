@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 import {
   Search, Eye, ArrowUpRight, ChevronDown, GraduationCap, 
-  Home as HomeIcon, UploadCloud, , , , , } from 'lucide-react';
+  Home as HomeIcon, UploadCloud } from 'lucide-react';
 import { subjectsMap } from '../lib/constants';
 import { useUser, getInitials } from '../lib/user';
 
