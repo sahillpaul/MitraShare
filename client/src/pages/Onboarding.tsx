@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Rocket, ShieldCheck } from 'lucide-react';
@@ -11,6 +11,12 @@ export default function Onboarding() {
 
   const semesters = [1, 2, 3, 4, 5, 6, 7, 8];
 
+  useEffect(() => {
+    if (localStorage.getItem('mitrashare_is_new_user') !== 'true') {
+      navigate('/home');
+    }
+  }, [navigate]);
+
   const handleSemesterSelect = async (semester: number) => {
     setSelectedSemester(semester);
     setError('');
@@ -19,6 +25,7 @@ export default function Onboarding() {
     try {
       // The backend route for updating profile is PATCH /api/users/me
       await axios.patch('/api/users/me', { semester });
+      localStorage.removeItem('mitrashare_is_new_user');
       navigate('/home');
     } catch (err: any) {
       const apiErr = err.response?.data?.error;

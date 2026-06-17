@@ -50,6 +50,7 @@ export default function Login() {
       const response = await axios.post('/api/auth/google', { token: credentialResponse.credential });
       localStorage.setItem('isAuthenticated', 'true');
       if (response.data.isNewUser) {
+        localStorage.setItem('mitrashare_is_new_user', 'true');
         navigate('/onboarding');
       } else {
         navigate('/home');
