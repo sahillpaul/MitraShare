@@ -102,7 +102,7 @@ export default function Profile() {
 
 
       {/* --- DESKTOP NAV --- */}
-              <nav className="flex items-center justify-between w-full h-[72px] px-6 bg-[var(--card)]/90 backdrop-blur-md border-b border-[var(--line)] sticky top-0 z-20">
+              <nav className="hidden md:flex items-center justify-between w-full h-[72px] px-6 bg-[var(--card)]/90 backdrop-blur-md border-b border-[var(--line)] sticky top-0 z-20">
           {/* Left Zone: Logo */}
           <NavLink to="/home" className="flex items-center gap-3 text-[22px] font-extrabold tracking-tight flex-shrink-0 w-48">
             <span className="w-10 h-10 flex items-center justify-center text-white bg-[var(--accent)] rounded-[10px] shadow-lg shadow-[var(--accent)]/30"><GraduationCap size={22} strokeWidth={2.35} /></span>
