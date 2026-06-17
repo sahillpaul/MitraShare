@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { GoogleLogin } from '@react-oauth/google';
@@ -15,6 +15,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const isGoogleLoginProcessing = React.useRef(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +43,8 @@ export default function Login() {
   };
 
   const handleGoogleSuccess = async (credentialResponse: any) => {
+    if (isGoogleLoginProcessing.current) return;
+    isGoogleLoginProcessing.current = true;
     try {
       const response = await axios.post('/api/auth/google', { token: credentialResponse.credential });
       localStorage.setItem('isAuthenticated', 'true');
@@ -53,6 +56,8 @@ export default function Login() {
     } catch (err: any) {
       const apiErr = err.response?.data?.error;
       setError(typeof apiErr === 'string' ? apiErr : "Google authentication failed.");
+    } finally {
+      isGoogleLoginProcessing.current = false;
     }
   };
 
